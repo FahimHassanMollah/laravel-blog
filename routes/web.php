@@ -21,3 +21,6 @@ Route::get('/', function () {
 
 Route::get('/',[FrontEndController::class,'index']);
 Route::get('/post',[FrontEndController::class,'post']);
+
+Route::get('/register',[FrontEndController::class,'showRegistrationForm'])->name('register');
+Route::post('/register',[FrontEndController::class,'processRegistration']);
