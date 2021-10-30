@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,19 @@ Route::get('/', function () {
 Route::get('/',[FrontEndController::class,'index']);
 Route::get('/post',[FrontEndController::class,'post']);
 
-Route::get('/register',[FrontEndController::class,'showRegistrationForm'])->name('register');
-Route::post('/register',[FrontEndController::class,'processRegistration']);
+
+
+// Route::get('/register',[FrontEndController::class,'showRegistrationForm'])->name('register');
+
+// Route::post('/register',[FrontEndController::class,'processRegistration']);
+
+
+// auth
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+
+Route::post('/register', [AuthController::class, 'processRegistration']);
+
+
+
+Route::get('/login',[AuthController::class,'showLoginForm'])->name('login');
+Route::post('/login',[AuthController::class,'processLogin'])->name('login');
