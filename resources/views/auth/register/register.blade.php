@@ -1,9 +1,11 @@
 @extends('layouts.master')
 @section('content')
 
-    <h1>Registration</h1>
 
     <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
+        @if (session()->has('message'))
+         <h1 class="@if(session('type') ==='success') 'text-success' @else 'text-danger' @endif">{{ session('message') }}</h1>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

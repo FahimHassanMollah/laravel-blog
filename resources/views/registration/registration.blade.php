@@ -4,6 +4,11 @@
     {{ session('message') }}
 @endif
     <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
+        {{ dd(session) }}
+        @if (session()->has('message'))
+            <h1 class="{{ @if(session('type') ==='success') text-success @else text-danger }}">{{ session('message') }}</h1>
+        @endif
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
