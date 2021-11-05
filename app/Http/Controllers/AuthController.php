@@ -63,12 +63,18 @@ class AuthController extends Controller
          {
             $request->session()->flash('message', 'Registration success');
             $request->session()->flash('type', 'success');
-             return redirect('/');
+             return redirect(route('dashboard'));
         }
         else{
             $request->session()->flash('message', 'wrong email or password');
             $request->session()->flash('type', 'error');
             return redirect()->back();
         }
+    }
+    public  function logout(Request $request){
+        $request->session()->flash('type', 'success');
+        $request->session()->flash('message', 'logout done');
+        auth()->logout();
+        return redirect(route('login'));
     }
 }

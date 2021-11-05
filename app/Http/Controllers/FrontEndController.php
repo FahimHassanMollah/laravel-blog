@@ -22,6 +22,11 @@ class FrontEndController extends Controller
         return view('registration.registration');
     }
 
+    public function dashboardShow(Request $request)
+    {
+        return view('dashboard.dashboard');
+    }
+
     public function processRegistration(Request $request)
     {
           $validate = $request -> validate([

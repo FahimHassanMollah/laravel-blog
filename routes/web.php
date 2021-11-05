@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,10 +24,8 @@ Route::get('/',[FrontEndController::class,'index']);
 Route::get('/post',[FrontEndController::class,'post']);
 
 
-
-// Route::get('/register',[FrontEndController::class,'showRegistrationForm'])->name('register');
-
-// Route::post('/register',[FrontEndController::class,'processRegistration']);
+//dashboard page
+Route::get('/dashboard',[FrontEndController::class,'dashboardShow'])->name('dashboard');
 
 
 // auth
@@ -39,3 +37,17 @@ Route::post('/register', [AuthController::class, 'processRegistration']);
 
 Route::get('/login',[AuthController::class,'showLoginForm'])->name('login');
 Route::post('/login',[AuthController::class,'processLogin'])->name('login');
+
+Route::get('/profile',[AuthController::class,'profileShow'])->name('profile');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+
+
+//categories route
+
+Route::get('/categories',[CategoryController::class,'index'])->name('categories.index');
+Route::get('/categories/add',[CategoryController::class,'create'])->name('categories.create');
+Route::post('/categories/create',[CategoryController::class,'store'])->name('categories.store');
+Route::get('/categories/{id}',[CategoryController::class,'show'])->name('categories.show');
+Route::get('/categories/{id}/edit',[CategoryController::class,'update'])->name('categories.update');
+Route::delete('/categories/{id}',[CategoryController::class,'delete'])->name('categories.delete');
