@@ -6,7 +6,7 @@
   <div>
       <h1>Welcome to Dashboard </h1>
       <div>
-          <button class="btn btn-warning">Create Category</button>
+          <a href="{{ route('categories.create') }}" class="btn btn-warning">Create Category</a>
       </div>
   </div>
 

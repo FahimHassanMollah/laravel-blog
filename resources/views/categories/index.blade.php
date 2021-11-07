@@ -20,7 +20,7 @@
                 <th scope="row">{{$category->slug}}</th>
                 <th scope="row">{{$category->status}}</th>
                 <th scope="row">
-                    <button class="btn btn-primary">Details</button>
+                    <a href="{{ route('categories.show',['id'=>$category->id]) }}" class="btn btn-primary">Details</a>
                 </th>
 
             </tr>
