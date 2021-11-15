@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +23,7 @@ Route::get('/', function () {
 
 
 Route::get('/',[FrontEndController::class,'index']);
-Route::get('/post',[FrontEndController::class,'post']);
+// Route::get('/post',[FrontEndController::class,'post']);
 
 
 //dashboard page
@@ -52,3 +54,11 @@ Route::get('/categories/{id}',[CategoryController::class,'show'])->name('categor
 Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->name('categories.edit');
 Route::put('/categories/{id}/edit',[CategoryController::class,'update'])->name('categories.update');
 Route::delete('/categories/{id}',[CategoryController::class,'delete'])->name('categories.delete');
+
+
+
+
+
+// Post routes
+
+Route::resource('posts', PostController::class);
