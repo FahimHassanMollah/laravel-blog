@@ -12,13 +12,13 @@
         </tr>
         </thead>
         <tbody>
-
+            {{-- {{ dd($posts) }} --}}
         @foreach($posts as $post)
             <tr>
                 <th scope="row">{{$post->id}}</th>
                 <th scope="row">{{$post->title}}</th>
                 <th scope="row">{{$post->category->name}}</th>
-                <th scope="row">{{$post->user_id}}</th>
+                <th scope="row">{{$post->status}}</th>
                 <th scope="row">
                     <a href="{{ route('posts.show',['post'=>$post->id]) }}" class="btn btn-primary">Details</a>
                 </th>

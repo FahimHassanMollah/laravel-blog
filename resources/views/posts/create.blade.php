@@ -3,7 +3,7 @@
 @section('content')
 
     <div>
-        <h1>Add Category </h1>
+        <h1>Add Posts </h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -16,22 +16,39 @@
         @if (session()->has('message'))
             <h1 class="text-success">{{ session('message') }}</h1>
         @endif
-        <form action="{{ route('categories.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Name</label>
-                <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="exampleInputEmail1" class="form-label">Title</label>
+                <input name="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
             </div>
-             <label for="exampleInputEmail1" class="form-label">Status</label>
-            <select name="status" class="form-select" aria-label="Default select example">
-                <option selected>Select Status</option>
-                <option value="1">Active</option>
-                <option value="2">Inactive</option>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Description</label>
+                <textarea name="content" type="text" class="form-control" id="" aria-describedby=""></textarea>
 
-            </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Status</label>
+                <select name="status" class="form-select" aria-label="Default select example">
+                    <option selected>Select Status</option>
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
 
-            <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                <select name="category_id" class="form-select" aria-label="Default select example">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                    @endforeach
+
+
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-5">Create Post</button>
         </form>
 
         <div>

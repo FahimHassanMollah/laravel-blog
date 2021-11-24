@@ -37,8 +37,10 @@ class CategoryController extends Controller
 
     public function show(Request $request,$id)
     {
-        $categoryDetails = Category::find($id);
+        $categoryDetails = Category::with('posts','posts.user')->find($id);
+
         // dd($categoryDetails);
+
         return view('categories.show',compact('categoryDetails'));
     }
     public function edit(Request $request,$id)
@@ -55,7 +57,7 @@ class CategoryController extends Controller
         ]);
 
         $category = Category::find($id);
-     
+
         $category->update([
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),

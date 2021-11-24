@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,7 +18,7 @@ class PostController extends Controller
     {
         //
         $data=[];
-        $data['posts'] = Post::select('id','title','category_id','user_id','status')->paginate(10);
+        $data['posts'] = Post::with('category','user')->select('id','title','category_id','user_id','status')->paginate(10);
 
 
         return view('posts.index',$data);
@@ -30,6 +32,8 @@ class PostController extends Controller
     public function create()
     {
         //
+       $categories = Category::all();
+        return view('posts.create',compact('categories'));
     }
 
     /**
@@ -41,6 +45,23 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'title' => ['required', 'unique:posts,title', 'max:255'],
+            'status' => ['required','between:0,1'],
+        ]);
+
+        Post::create([
+            'title' => $request->input('title'),
+            'category_id' =>$request->input('category_id'),
+            'status' => $request->input('status'),
+            'content' => $request->input('content'),
+            'user_id' => Auth::user()->id,
+            'thumbnail_path'=>''
+        ]);
+        $request->session()->flash('message', 'Posts created successfully');
+        return redirect()->back();
+
     }
 
     /**

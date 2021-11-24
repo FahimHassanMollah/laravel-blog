@@ -17,6 +17,34 @@
             <h1 class="text-success">{{ session('message') }}</h1>
         @endif --}}
         {{-- {{ dd($categoryDetails) }} --}}
+        {{-- {{ dd($categoryDetails->posts) }} --}}
+        <br>
+        <h4>All post from this category</h4>
+       <table class="table">
+       <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Post Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Status</th>
+            <th scope="col">Author</th>
+
+        </tr>
+       </thead>
+       <tbody>
+        @foreach($categoryDetails->posts as $post)
+        <tr>
+            <th scope="row">{{$post->id}}</th>
+            <th scope="row">{{$post->title}}</th>
+            <th scope="row">{{$categoryDetails->name}}</th>
+            <th scope="row">{{$post->status}}</th>
+            <th scope="row">{{$post->user->full_name}}</th>
+
+
+        </tr>
+       </tbody>
+    @endforeach
+       </table>
        <h1>Id : {{ $categoryDetails->id }}</h1>
        <h1>Name : {{ $categoryDetails->name }}</h1>
        <h1>Status : {{ $categoryDetails->status === 1 ? 'Active' : 'Inactive' }}</h1>
